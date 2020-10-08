@@ -122,7 +122,7 @@ speak() {
   return `Hello my name is ${this.name}, I am from ${this.location}.`
 }
 }
-
+const joey = new Lambdasian({name: 'joey', age: 23, location: 'brentwood'});
 /*
   TASK 4
     - Write an Instructor class extending Lambdasian.
@@ -140,15 +140,15 @@ speak() {
 class Instructor extends Lambdasian {
 constructor (obj) {
   super (obj);
-  this.specialty = 'coding';
-  this.favLanguage = 'JavaScript';
-  this.catchPhrase = 'Down for my homies';
+  this.specialty = obj.specialty;
+  this.favLanguage = obj.favLanguage;
+  this.catchPhrase = obj.catchPhrase;
 }
 demo (subject) {
-return `Today we are learning about ${subject}.`
+return `Today we are learning about ${subject}.`;
 }
 grade (student, subject) {
-return `${student} receives a perfect score on ${subject}`
+return `${student} receives a perfect score on ${subject}`;
 }
 }
 
@@ -167,10 +167,26 @@ return `${student} receives a perfect score on ${subject}`
         + `PRAssignment` a method that receives a subject as an argument and returns `student.name has submitted a PR for {subject}`
         + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`
 */
-class Student {
-
+class Student extends Lambdasian {
+constructor (obj) {
+  super(obj);
+  this.previousBackground = obj.previousBackgroundl
+  this.className = obj.className
+  this.favSubjects = obj.favSubjects;
 }
+listSubjects () {
+  return this.favSubjects.toString();
+}
+PRAssignment (subject) {
+  return `${this.name} has submitted a PR for ${subject}`;
+}
+sprintChallenge (subject) {
+  return `${this.name} has begun sprint challenge on ${subject}`;
+}
+}
+const me = new Student({favSubjects: ['HTML', 'JS'], name: 'nico'});
 
+console.log(me.PRAssignment('math'));
 /*
   TASK 6
     - Write a ProjectManager class extending Instructor.
@@ -184,10 +200,22 @@ class Student {
         + `standUp` a method that takes in a slack channel and returns `{name} announces to {channel}, @channel standy times!`
         + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
 */
-class ProjectManager {
-
+class ProjectManager extends Instructor {
+constructor (obj) {
+super (obj);
+this.gradClassName = obj.gradClassName;
+this.favInstructor = obj.favInstructor;
 }
+standUp (name, channel) {
+  return `${name} announces to ${channel}, @channel standy times!`;
+}
+debugsCode (student, subject) {
+  return `${this.name} debugs ${student.name}'s code on ${subject}`
+}
+}
+const jon = new ProjectManager({name: 'jon'});
 
+console.log(jon.debugsCode(me, 'JS'));
 /*
   STRETCH PROBLEM (no tests!)
     - Extend the functionality of the Student by adding a prop called grade and setting it equal to a number between 1-100.
