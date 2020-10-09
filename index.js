@@ -144,13 +144,20 @@ constructor (obj) {
   this.favLanguage = obj.favLanguage;
   this.catchPhrase = obj.catchPhrase;
 }
+// STRETCH
+addOrSub (student) {
+return student.grade+= Math.round(Math.random()* (-10 - 10) + -1);
+}
+// STRETCH
+
 demo (subject) {
 return `Today we are learning about ${subject}.`;
 }
-grade (student, subject) {
+review (student, subject) {
 return `${student} receives a perfect score on ${subject}`;
 }
 }
+const justin = new Instructor ({name: 'jusitn'});
 
 /*
   TASK 5
@@ -170,7 +177,11 @@ return `${student} receives a perfect score on ${subject}`;
 class Student extends Lambdasian {
 constructor (obj) {
   super(obj);
-  this.previousBackground = obj.previousBackgroundl
+  this.previousBackground = obj.previousBackground
+  // STRETCH 
+  this.grade = Math.round(Math.random()*101);
+  // STRETCH
+  console.log(this.grade);
   this.className = obj.className
   this.favSubjects = obj.favSubjects;
 }
@@ -183,10 +194,18 @@ PRAssignment (subject) {
 sprintChallenge (subject) {
   return `${this.name} has begun sprint challenge on ${subject}`;
 }
+graduate () {
+  if (this.grade >= 70) {
+    return `Yay! ${this.name} is going to graduate!`;
+  } else {
+    return `Sorry, ${this.name}, better go hit the books!`;
+  }
 }
-const me = new Student({favSubjects: ['HTML', 'JS'], name: 'nico'});
-
+}
+const me = new Student({favSubjects: ['HTML', 'JS'], name: 'nico', grade: 0});
+console.log(justin.addOrSub(me));
 console.log(me.PRAssignment('math'));
+console.log(me.graduate());
 /*
   TASK 6
     - Write a ProjectManager class extending Instructor.
@@ -224,6 +243,8 @@ console.log(jon.debugsCode(me, 'JS'));
       + This method, when called, will check the grade of the student and see if they're ready to graduate from Lambda School
       + If the student's grade is above a 70% let them graduate! Otherwise go back to grading their assignments to increase their score.
 */
+
+
 
 ///////// END OF CHALLENGE /////////
 ///////// END OF CHALLENGE /////////
